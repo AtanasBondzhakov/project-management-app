@@ -1,8 +1,12 @@
 import { dateFormatter } from "../utils.js";
+import Tasks from "./Tasks.jsx";
 
 export default function SelectedProject({
-    project, 
-    onDelete
+    project,
+    onDelete,
+    onAddTask,
+    onDeleteTask,
+    tasks
 }) {
     return (
         <div className="w-[35rem] mt-16">
@@ -19,7 +23,11 @@ export default function SelectedProject({
                 <p className="mb-4 text-stone-400">{dateFormatter(project.dueDate)}</p>
                 <p className="text-slate-600 whitespace-pre-wrap">{project.description}</p>
             </header>
-            Tasks
+            <Tasks
+                onAdd={onAddTask}
+                onDelete={onDeleteTask}
+                tasks={tasks}
+            />
         </div>
     );
 };
