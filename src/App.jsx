@@ -31,21 +31,30 @@ function App() {
                 projects: [...projectsState.projects, newProject]
             };
         })
+    };
+
+    const handleCancelProject = () => {
+        setProjectsState(state => {
+            return {
+                ...state,
+                selectedProjectId: undefined
+            }
+        })
     }
 
     let content;
 
     if (projectsState.selectedProjectId === null) {
-        content = <NewProject onAdd={handleAddProject} />
+        content = <NewProject onAdd={handleAddProject} onCancel={handleCancelProject} />
     } else if (projectsState.selectedProjectId === undefined) {
         content = <NoProjectSelected onStartAddProject={handleStartAddProject} />
     }
 
     return (
         <main className="h-screen my-8 flex gap-8">
-            <ProjectsSidebar 
-            onStartAddProject={handleStartAddProject}
-            projectsList={projectsState.projects}
+            <ProjectsSidebar
+                onStartAddProject={handleStartAddProject}
+                projectsList={projectsState.projects}
             />
             {content}
         </main>
